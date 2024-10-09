@@ -46,12 +46,12 @@ console.log('recommend es', recommend)
   return (
     <div className='container' style={{ paddingTop: '65px' }}>
       <h1 style={{ padding: '0' }}>
-  <span style={{ fontWeight: 'normal' }}>Hello {user.username}</span>
+  <span style={{ fontWeight: 'normal' }}>Hello {user.username} <a style={{fontWeight:'lighter'}}>{user.favoriteGenre}</a></span>
   <br />
   { 
   recommend.length > 0 ? 
-    "We recommend" : 
-    "Not have recommend"
+    `in ${user.favoriteGenre} we recommend` : 
+    `Not have any ${user.favoriteGenre} recommendations`
 }
 </h1>
       <br />
