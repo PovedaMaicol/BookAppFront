@@ -46,6 +46,11 @@ const App = () => {
   const client = useApolloClient()
 
 
+  
+
+  // console.log('result book es', resultBook.data.allBooks.length)
+
+
 
 
 
@@ -56,7 +61,6 @@ const App = () => {
   useEffect(() => {
     if (meData && meData.me) {
       setUser(meData.me);
-      console.log("Datos de usuario:", meData.me);
     }
   }, [meData, token]);
 
@@ -80,15 +84,19 @@ const App = () => {
   
 useSubscription(BOOK_ADDED, {
   onData: ({ data }) => {
-    console.log(data)
     const addedBook = data.data.bookAdded
     console.log('libro añadido', addedBook)
     // window.alert(`${addedBook.title} added`) 
-    setMessage(notify)
+    setMessage(`${addedBook.title} added`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 10000)
   
     updateCacheWith(addedBook)
   }
 })
+
+
 
   if (result.loading || resultBook.loading)  {
     return <div>loading...</div>
@@ -101,12 +109,12 @@ useSubscription(BOOK_ADDED, {
     setPage("authors")
     setIsVisible(false)
     setUser(null)
-    console.log(localStorage)
+
   }
 
   const notify = (message) => {
     setMessage(message)
-    console.log(`Notification is: ${message}`)
+
     setTimeout(() => {
       setMessage(null)
     }, 10000)
@@ -156,6 +164,7 @@ logout={logout}
 
       <Books 
       show={page === "books"} 
+      setMessage={notify}
       />
 
       <NewBook 
@@ -176,7 +185,7 @@ logout={logout}
       />
      
 
-     <Recommend show={page === "recommend"} user={user} setUser={setUser}/>
+     <Recommend show={page === "recommend"} user={user} setUser={setUser} books={resultBook.data ? resultBook.data.allBooks : []}/>
     
     <div>
     </div>  
