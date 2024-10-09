@@ -46,7 +46,7 @@ console.log('recommend es', recommend)
   return (
     <div className='container' style={{ paddingTop: '65px' }}>
       <h1 style={{ padding: '0' }}>
-  <span style={{ fontWeight: 'normal' }}>Hello {user.username} <a style={{fontWeight:'lighter'}}>{user.favoriteGenre}</a></span>
+  <span style={{ fontWeight: 'normal' }}>Hello {user.username}</span>
   <br />
   { 
   recommend.length > 0 ? 
